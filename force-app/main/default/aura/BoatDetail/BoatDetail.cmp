@@ -1,0 +1,42 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="boat" type="Boat__c" />
+    <lightning:card iconName="utility:anchor">
+        <aura:set attribute="title">
+            {!v.boat.Contact__r.Name}'s Boat
+        </aura:set>
+        <aura:set attribute="actions">
+            <aura:if isTrue="{!v.displaybutton}">
+                <lightning:button label="Full Details" onclick="{!c.onFullDetails}" />
+            </aura:if>
+        </aura:set>
+        <lightning:layout horizontalAlign="space" multipleRows="true">
+            <lightning:layoutitem size="6" padding="around-small">
+                <div class="slds-p-horizontal--small">
+                    <div class="boatproperty">
+                        <span class="label">Boat Name:{!boat.Name}</span>
+                        <span></span>
+                    </div>
+                    <div class="boatproperty">
+                        <span class="label">Type:{!boat.BoatType__r.Name}</span>
+                        <span></span>
+                    </div>
+                    <div class="boatproperty">
+                        <span class="label">Length:{!boat.Length__c}</span>
+                        <span> ft</span>
+                    </div>
+                    <div class="boatproperty">
+                        <lightning:formattedNumber value="{!v.boat.Price__c}" style="currency" currencyCode="USD"/>
+                        <span></span>
+                    </div>
+                    <div class="boatproperty">
+                        <span class="label">Description:{!boat.Description__c}</span>
+                        <lightning:formattedRichText value="{! v.boat.Description__c }" />
+                    </div>
+                </div>
+            </lightning:layoutitem>
+            <lightning:layoutitem size="6" padding="around-small">
+                <div class="imageview" style="{!'background-image: url(' + v.boat.Picture__c + ')'}" />
+            </lightning:layoutitem>
+        </lightning:layout>
+    </lightning:card>
+</aura:component>
